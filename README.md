@@ -5,6 +5,7 @@ Projektstart 18/11 - 19
 Setup:
 
 Visual studio community 2019
+
 Nuget att installera Visual Studio: 
 
 DotNETSeleniumExtras.Waithelpers
