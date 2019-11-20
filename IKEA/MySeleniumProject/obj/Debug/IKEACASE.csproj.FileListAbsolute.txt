@@ -1,0 +1,2 @@
+C:\Users\Tarla\source\repos\IKEA\MySeleniumProject\obj\Debug\IKEACASE.csprojAssemblyReference.cache
+C:\Users\Tarla\source\repos\IKEA\MySeleniumProject\obj\Debug\IKEACASE.csproj.CoreCompileInputs.cache
