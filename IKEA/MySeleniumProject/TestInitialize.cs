@@ -60,7 +60,7 @@ namespace MySeleniumProject
            
 
             driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl("https://www.ikea.com");
+            driver.Navigate().GoToUrl("https://www.ikea.com/se/sv");
 
         }
 

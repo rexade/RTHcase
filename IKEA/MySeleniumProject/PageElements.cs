@@ -20,10 +20,9 @@ namespace LandindPageClass {
 
         }
 
-
-        public IWebElement Niktinshot()
+        public IWebElement BuyList()
         {
-            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.LinkText("Nikotinshots")));
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/header/div[2]/div/nav[2]/ul/li[2]/a")));
         }
 
 
