@@ -34,15 +34,16 @@ namespace LandindPageClass {
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/header/div[2]/div/nav[2]/ul/li[3]/a/span[2]")));
         }
 
+        public IWebElement BuyList() //Klicka på inköpslistan
+        {
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/header/div[2]/div/nav[2]/ul/li[2]/a")));
+        }
 
 
         /*INKÖPSLISTAN
          
         */
-        public IWebElement BuyList() //Klicka på inköpslistan
-        {
-            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/header/div[2]/div/nav[2]/ul/li[2]/a")));
-        }
+
 
         public IWebElement MyBuyList() //Klicka på inköpslista från "inköpslista"
         {
