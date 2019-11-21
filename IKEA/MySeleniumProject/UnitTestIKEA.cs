@@ -55,6 +55,7 @@ namespace MySeleniumProject
 
             //Menus
             //pageElement.EjuiceMenuTopBar().Click();
+            //pageElement.CookieBannerButton().Click();
             pageElement.BuyList().Click();
             //pageElement.StartKitMenuTopBar().Click();
             //pageElement.ModsMenuTopBar().Click(); // Om varan tar slut då kan man ändra härifrån till en annan så att man kan testa med antal och lägg i varukorg.
