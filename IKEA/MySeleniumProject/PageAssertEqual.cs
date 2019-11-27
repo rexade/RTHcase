@@ -20,15 +20,24 @@ namespace LandindPageClass
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
 
         }
-
-
-        public IWebElement ModsItemText()
+        //Global
+        public IWebElement ShopAtIkea_Text()
         {
-            return driver.FindElement(By.XPath("//h2[contains(.,'SMOK Mag 225W Mod Specifikationer:')]"));
-
-
+            return driver.FindElement(By.CssSelector("#footer-accordion0 > p > span > strong"));
         }
 
+
+        //Kundvagnssidan
+        public IWebElement KundvagnText() //Texten som visas på Kundvagnssidan där det står "Kundvagn"
+        {
+            return driver.FindElement(By.CssSelector("#one-checkout > div.shoppingbag._Rfx0_._Rfx1_._Rfx2_ > div > div.noproducts._Rfx8_._Rfx2_ > div.noproducts__text._Rfx3_._Rfx7_ > h2"));
+        }
+        public IWebElement SecureshopText() // Texten som visas att sidan har "Säker shopping"
+        {
+            return driver.FindElement(By.CssSelector("#one-checkout > div.shoppingbag._Rfx0_._Rfx1_._Rfx2_ > div > div.shoppingbag-footer._Rfx2_ > div:nth-child(2) > ul > li.checkoutinformation_secure"));
+        }
+
+        //Startsidan
         public IWebElement ModsItemText1()
         {
 
@@ -37,11 +46,23 @@ namespace LandindPageClass
         }
 
 
-        public void AssertModItems()
+
+
+        public void AssertKundvagn() //Kundvagnssidan
         {
 
-            Assert.AreEqual("SMOK Mag 225W Mod Specifikationer:", ModsItemText().Text);
-            Assert.AreEqual("SMOK TFV12 Prince Tank Specifikationer:", ModsItemText1().Text);
+            Assert.AreEqual("Kundvagn", KundvagnText().Text); //Jämför texten Kundvagn med texten som finns på kundvagnsidan
+            Assert.AreEqual("Säker shopping", SecureshopText().Text);
+        }
+
+        public void AssertMainpage() // Asserts som är på Startsidan
+        {
+            Assert.AreEqual("Kundvagn", KundvagnText().Text); //Jämför texten Kundvagn med texten som finns på kundvagnsidan
+        }
+
+        public void AssertGlobal() // Asserts som påverkar alla Ikea pages
+        {
+            Assert.AreEqual("Handla på IKEA.se",ShopAtIkea_Text().Text);
         }
 
 
