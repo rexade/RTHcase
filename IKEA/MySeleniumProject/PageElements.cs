@@ -100,7 +100,7 @@ namespace LandindPageClass {
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/div[3]/div[2]/div/div[1]/h1/button")));
         }
 
-        public IWebElement Products() //Klicka på "bläddra bland våra produkter" inifrån inköpslistan
+        public IWebElement ProductsFromBuyList() //Klicka på "bläddra bland våra produkter" inifrån inköpslistan
         {
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id=\"one-checkout\"]/div[2]/div/div[3]/div[2]/div[2]/div[1]/a")));
         }
@@ -158,6 +158,16 @@ namespace LandindPageClass {
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id=\"one-checkout\"]/div[2]/div/div[2]/div[1]/form/div[2]/button/span")));
         }
 
+        public IWebElement InputFieldAddProductArtNr() //Inmatningsfält för artikel nummer
+        {
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("productId")));
+        }
+
+        public IWebElement ProductQuantityList() //Lista med antal man vill lägga till
+        {
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("productQuantity")));
+        }
+        
         public IWebElement DeleteProductFromBuyList() //Klicka på "soptunnan" från kundvagn
         {
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id=\"one - checkout\"]/div[2]/div/div[2]/div/div/div[4]/div[2]/div[1]/button")));
