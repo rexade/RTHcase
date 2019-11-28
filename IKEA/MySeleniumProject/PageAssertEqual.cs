@@ -51,6 +51,11 @@ namespace LandindPageClass
             return driver.FindElement(By.CssSelector("# root > div > div.sc-cvbbAY.sc-jhAzac.lovXuZ > div > div.sc-gqjmRU.erpLkq > div.sc-bdVaJa.gfemLW > div > div.alert__container > div > p"));
         }
 
+        public IWebElement LoginBliIkeaFamily() // Texten Ikea Family på Ikea family medlems sidan
+        {
+            return driver.FindElement(By.CssSelector("#bli_ikea_family_medlem > span"));
+        }
+
         //|||-------------------Produkthantering----------------------------------|||
 
             // ---------------------STOL-----------------------
@@ -94,6 +99,16 @@ namespace LandindPageClass
             return driver.FindElement(By.CssSelector("body > div.ReactModalPortal > div > div > div > div > button > span"));
         }
 
+        public IWebElement InkopTabortList() //Texten "Ta bort" Inne i inköpslistan/inköpslistan/soptunnan
+        {
+            return driver.FindElement(By.CssSelector("body > div.ReactModalPortal > div > div > ul > li > div.product__remove-confirmation._Rfx9_._Rfx3_._Rfxb_._Rfxe_._Rfx2_ > div.product__remove-confirmation-yes._Rfxg_ > button > span"));
+        }
+
+
+        public IWebElement InkopTillganligList() //Texten "Välj ett Ikea varuhus" Inne i inköpslistan/inköpslistan När man valt en lista med något i listan. finns det "Tillängligt varuhus?"
+        {
+            return driver.FindElement(By.CssSelector("#storeselector"));
+        }
 
 
         //|||----------------------Startstidan-------------------------|||
@@ -209,44 +224,44 @@ namespace LandindPageClass
             Assert.AreEqual("Kundservice", StartPageKundserviceText().Text);
         }
         //|||***************************************************ASSERTS PRODUKTER********************************************************|||
-        public void AssertProductpage()
+        public void AssertProductpage() // Vid tryck på Produkter 
         {
             Assert.AreEqual("Sängar & madrasser", ProductsBedText().Text);
         }
 
-        public void AssertProductTextil()
+        public void AssertProductTextil() //vid Tryck på Produkter/textil finns Babytextiler.
         {
             Assert.AreEqual("Babytextilier", ProductsTextiler().Text);
         }
 
-        public void AssertProductTextilKök()
+        public void AssertProductTextilKök() // Vid tryck på Produkter/textil/kök kommer text upp ..jämför
         {
             Assert.AreEqual("Matlagningen växlar efter årstiderna. Sallader och smoothies byts ut mot soppor, grytor och kakor. Vårt breda sortiment av kökstextilier kompletterar din matlagning under året med grytlappar, förkläden och kökshanddukar som gör det enkelt att tillföra nya färger och mönster till ditt kök.", ProductsTextilerKökText().Text);
         }
 
-        public void AssertProductMobler()
+        public void AssertProductMobler() // vid tryck Produkter/möbler kommer byrå och hurts som alternativ.
         {
             Assert.AreEqual("Byråar & hurtsar", ProductsMoblerText().Text);
         }
 
-        public void AssertProductMoblerBord()
+        public void AssertProductMoblerBord() // vid tryck Produkter/mobler/bord kommer "Bestå" och val av "matbord"
         {
             Assert.AreEqual("BESTÅ BURS", ProductsMoblerBordBursText().Text);
             Assert.AreEqual("Matbord", ProductsMoblerBordText().Text);
         }
 
-        public void AssertProductForvaringTv()
+        public void AssertProductForvaringTv() // vid tryck produkter/förvaring/tv kommer text upp... jämför.
         {
             Assert.AreEqual("Från den svartvita tv:n till spel, streaming och 3D – vårt tv-tittande har onekligen utvecklats. Men en sak är densamma: du behöver fortfarande en tv-bänk eller en annan tv-förvaringslösning. Vårt sortiment hjälper dig att minimera stöket och hantera kablarna för en snyggare tv-miljö. Så att du kan koppla av och njuta av din tv, även när den inte är på.", ProductsForvaringTvText().Text);
         }
 
-        public void AssertProductTextilGard()
+        public void AssertProductTextilGard() // vid trck produkter/textil/gardiner kommer rubrik Gardiner och rullgardiner.
         {
             Assert.AreEqual("Gardiner & rullgardiner", ProductsTextilerGardRubrik().Text);
         }
         //|||***************************************************ASSERTS SÖKFÄLT********************************************************|||
 
-        public void AssertSearchBar()
+        public void AssertSearchBar() // vid tryck på Search Bar kommer "Populära sökningar" upp
         {
             Assert.AreEqual("Populära sökningar", SearchPopularText().Text);
         }
@@ -256,8 +271,18 @@ namespace LandindPageClass
         {
             Assert.AreEqual("Inte redo att köpa riktigt än?", NotReadyBuyYet().Text);
             Assert.AreEqual("Skapa en ny lista", InkopSkapaList().Text);
-
         }
+
+        public void AssertTabortInkop() // ta bort inköpslistan
+        {
+            Assert.AreEqual("Ta bort", InkopTabortList().Text);
+        }
+        
+        public void AssertInkopTillganglig() // Inne i en inkopslista kolla tillgänglighet i varuhus fältet.
+        {
+            Assert.AreEqual("Välj ett IKEA varuhus", InkopTillganligList().Text);
+        }
+
         //|||***************************************************ASSERTS LOGINSIDA********************************************************|||
 
 
@@ -275,7 +300,11 @@ namespace LandindPageClass
         {
             Assert.AreEqual("Min profil", LoginAttemptSuccess().Text);
             Assert.AreEqual("••••••••••", LoginSuccessPassVisible().Text);
+        }
 
+        public void AssertIkeaFamilyRubrik() //assert för ikea family rubrik
+        {
+            Assert.AreEqual("IKEA Family", LoginBliIkeaFamily().Text);
         }
         //|||***************************************************ASSERTS VID SÖKNINGAR********************************************************|||
 
