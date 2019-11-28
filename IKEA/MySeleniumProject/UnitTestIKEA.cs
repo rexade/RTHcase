@@ -21,7 +21,7 @@ namespace MySeleniumProject
 {
 
     [TestClass]
-    public class VapeHusetCheck
+    public class IkeaCheck
     {
         TestInitializeClass chrome = new TestInitializeClass();
         public TestContext TestContext { get; set; }
@@ -36,7 +36,7 @@ namespace MySeleniumProject
 
 
         [TestMethod]
-        public void SmokeTest()
+        public void IkeaTest()
         {
 
             chrome.SetUp();
@@ -50,21 +50,22 @@ namespace MySeleniumProject
 
             //Start
 
-            pageElement.AgeBanner().Click();
-            pageElement.VapehusetLogo().Click();
+            //pageElement.AgeBanner().Click();
+            //pageElement.VapehusetLogo().Click();
 
             //Menus
-            pageElement.EjuiceMenuTopBar().Click();
-            pageElement.Niktinshot().Click();
-            pageElement.StartKitMenuTopBar().Click();
-            pageElement.ModsMenuTopBar().Click(); // Om varan tar slut då kan man ändra härifrån till en annan så att man kan testa med antal och lägg i varukorg.
-            pageElement.ModsItem().Click();  //En produkt bland moddar på websidan denna då kan man ändra om det behövs
+            //pageElement.EjuiceMenuTopBar().Click();
+            //pageElement.CookieBannerButton().Click();
+            pageElement.BuyList().Click();
+            //pageElement.StartKitMenuTopBar().Click();
+            //pageElement.ModsMenuTopBar().Click(); // Om varan tar slut då kan man ändra härifrån till en annan så att man kan testa med antal och lägg i varukorg.
+            //pageElement.ModsItem().Click();  //En produkt bland moddar på websidan denna då kan man ändra om det behövs
 
 
             //Equal or no waiting for result
 
             //Varan slut?  då ska man ändra nedanstående raderna fram till Select anropet
-            pageAssert.AssertModItems();
+            /*pageAssert.AssertModItems();
             pageElement.SelectColour().Click();
             pageElement.Colour().Click();
 
@@ -93,7 +94,7 @@ namespace MySeleniumProject
             pageElement.QuantityUp();
             pageElement.AddToCart().Click();
             pageElement.Varukorg().Click();
-
+            
             string currentValue = pageAssert.InputVarukorgBoxInfo().GetAttribute("value");
             Assert.AreEqual("3", currentValue);
 
