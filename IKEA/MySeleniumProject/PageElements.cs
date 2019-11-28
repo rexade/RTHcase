@@ -44,6 +44,42 @@ namespace LandindPageClass {
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/header/div[2]/div/nav[2]/ul/li[1]/a/span[2]")));
         }
 
+        public IWebElement Products() //Klicka på "produkter"
+        {
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/header/div[2]/div/nav[1]/div/ul[1]/li[1]/button")));
+        }
+
+        public IWebElement ProductsFurniture() //Klicka på "möbler"
+        {
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/header/div[2]/div/nav[1]/div/ul[1]/li[1]/div/div[1]/ul/li[1]/button")));
+        }
+
+
+        public IWebElement ProductsFurnitureTableAndDesks() //Klicka på "bord och skrivbord"
+        {
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/header/div[2]/div/nav[1]/div/ul[1]/li[1]/div/div[1]/ul/li[1]/ul/li[4]")));
+        }
+
+        public IWebElement ProductsFurnitureTv() //Klicka på "tv och mediamöbler"
+        {
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/header/div[2]/div/nav[1]/div/ul[1]/li[1]/div/div[1]/ul/li[1]/ul/li[9]")));
+        }
+
+        public IWebElement ProductsTextiles() //Klicka på "Textilier"
+        {
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/header/div[2]/div/nav[1]/div/ul[1]/li[1]/div/div[1]/ul/li[8]/button")));
+        }
+
+        public IWebElement ProductsTextilesKitchen() //Klicka på "kökstextilier"
+        {
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/header/div[2]/div/nav[1]/div/ul[1]/li[1]/div/div[1]/ul/li[8]/ul/li[4]")));
+        }
+
+        public IWebElement ProductsTextilesCurtains() //Klicka på "gardiner och rullgardiner"
+        {
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/header/div[2]/div/nav[1]/div/ul[1]/li[1]/div/div[1]/ul/li[8]/ul/li[8]")));
+        }
+
 
         /*Sökfältet
          
