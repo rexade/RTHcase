@@ -24,19 +24,23 @@ namespace MySeleniumProject
         }
 
 
+        [TestInitialize]
+        public void SetUp()
+        {
+
+            chrome.SetUp();
+        }
+
+
         [TestMethod, TestCategory ("Startsidan")]
 
         public void Products()
         {
 
-            chrome.SetUp();
-
             var pageElement = new LandingPage(driver);
             var pageAssert = new PageAssert(driver);
 
-         
-            string fp = Directory.GetParent(System.Reflection.Assembly.GetExecutingAssembly().Location).FullName;
-
+             
 
             pageElement.CookieBannerButton().Click();
             
@@ -71,25 +75,39 @@ namespace MySeleniumProject
             pageElement.ProductsTextilesKitchen().Click();
             pageAssert.AssertProductTextilKök(); //assert
 
+
+
+        }
+        [TestMethod, TestCategory("Startsidan")]
+        public void ProductsDel2()
+        {
+
+            
+
+            var pageElement = new LandingPage(driver);
+            var pageAssert = new PageAssert(driver);
+
+
+            pageElement.CookieBannerButton().Click();
+
+         
             pageElement.LOGO().Click();
             pageElement.Products().Click();
             pageElement.ProductsTextiles().Click();
-
+            
             pageElement.ProductsTextilesCurtains().Click();
             pageAssert.AssertProductTextilGard();  //assert
-
+           
             pageElement.LOGO().Click();
             pageElement.MyProfile().Click();
 
+        }
 
         }
 
 
-    }
 
-
-
-    [TestClass]
+        [TestClass]
     public class Inköpslistan
     {
         TestInitializeClass chrome = new TestInitializeClass();
@@ -103,23 +121,30 @@ namespace MySeleniumProject
             chrome.CleanUp(TestContext);
         }
 
+
+        [TestInitialize]
+        public void SetUp()
+        {
+
+            chrome.SetUp();
+        }
+
         [TestMethod, TestCategory("Inköplistan")]
 
         public void Buy()
         {
 
-            chrome.SetUp();
-
+          
             var pageElement = new LandingPage(driver);
-           // var pageAssert = new PageAssert(driver);
+            var pageAssert = new PageAssert(driver);
 
-            pageElement.CookieBannerButton().Click();
+          
 
             pageElement.LOGO().Click();
+            //pageElement.CookieBannerButton().Click();
             pageElement.MyBuyList().Click();
 
-           // pageAssert.AssertInkop(); //assert
-         //   pageAssert.AssertTabortInkop();  //assert
+            pageAssert.AssertInkop(); //assert           
             pageElement.ProductsFromBuyList().Click();
 
 
@@ -170,8 +195,7 @@ namespace MySeleniumProject
         public void BuyCancelButton()
         {
 
-            chrome.SetUp();
-
+         
             var pageElement = new LandingPage(driver);
            
             pageElement.CookieBannerButton().Click();
@@ -200,8 +224,7 @@ namespace MySeleniumProject
         public void AddToShoppingBagFromBuyList()
         {
 
-            chrome.SetUp();
-
+           
             var pageElement = new LandingPage(driver);
              var pageAssert = new PageAssert(driver);
 
@@ -215,13 +238,14 @@ namespace MySeleniumProject
             pageElement.BuyItem().Click();
             pageElement.BuyItemAdd().Click();
             pageElement.ItemAddCheckBannerBuyList().Click();
-
+          
+         
 
             pageElement.LOGO().Click();
             pageAssert.AssertGlobal(); //assert
             pageElement.MyBuyList().Click();
             pageElement.SelectAmount().Click();
-            pageElement.SelectAmount().Click();
+            pageElement.SelectAmount().Click();          
             pageElement.BuyOnline().Click();
             pageElement.AddToShoppingBagFromBuyList().Click();
             pageElement.CloseBannerKundVagn().Click();
@@ -233,10 +257,9 @@ namespace MySeleniumProject
         public void BuyDeleteButton()
         {
 
-            chrome.SetUp();
-
+           
             var pageElement = new LandingPage(driver);
-             var pageAssert = new PageAssert(driver);
+            var pageAssert = new PageAssert(driver);
 
             pageElement.CookieBannerButton().Click();
 
@@ -255,6 +278,7 @@ namespace MySeleniumProject
             pageElement.LOGO().Click();
             pageElement.MyBuyList().Click();
             pageElement.DeleteProductInShopList().Click();
+            pageAssert.AssertTabortInkop();  //assert
             pageElement.DeleteItem().Click();
 
 
@@ -280,20 +304,26 @@ namespace MySeleniumProject
             chrome.CleanUp(TestContext);
         }
 
+        [TestInitialize]
+        public void SetUp()
+        {
+
+            chrome.SetUp();
+        }
+
 
         [TestMethod, TestCategory("KundVagn")]
 
         public void Cart()
         {
 
-            chrome.SetUp();
+          
 
             var pageElement = new LandingPage(driver);
-            var pageAssert = new PageAssert(driver);
+           var pageAssert = new PageAssert(driver);
 
             pageElement.CookieBannerButton().Click();
-
-            pageElement.LOGO().Click();
+         
             pageAssert.AssertGlobal(); //assert
 
             pageElement.CartIcon().Click();
@@ -317,16 +347,22 @@ namespace MySeleniumProject
             pageElement.BuyItem().Click();
             pageElement.ProductAddToCartButton().Click();
 
-
+            pageElement.CloseBannerIfDisplayed();
+            pageElement.LOGO().Click();
             pageElement.CartIcon().Click();
             pageElement.DeleteProductFromBuyList().Click();
             pageElement.CancelFromBuylist().Click();
 
-
+            pageElement.LOGO().Click();
             pageElement.CartIcon().Click();
             pageElement.DeleteProductFromBuyList().Click();
             pageElement.ConfirmDeleteFromBuyList().Click();
-   
+            
+     
+
+
+
+
         }
 
         [TestMethod, TestCategory("KundVagn")]
@@ -334,36 +370,33 @@ namespace MySeleniumProject
         public void CartCheckout()
         {
 
-            chrome.SetUp();
-
+           
             var pageElement = new LandingPage(driver);
             var pageAssert = new PageAssert(driver);
 
             pageElement.CookieBannerButton().Click();
-
-            pageElement.LOGO().Click();
-
-            pageElement.LOGO().Click();
+                       
             pageElement.Products().Click();
             pageElement.ProductsFurniture().Click();
             pageElement.ProductsFurnitureTableAndDesks().Click();
             pageElement.BuyItem().Click();
+            // var n = pageElement.getNbrOfItemsInCart();
             pageElement.ProductAddToCartButton().Click();
+            // pageElement.WaitUntilCartContainsNbrOfElement(n + 1);
             Thread.Sleep(1000);
+            pageElement.CloseBannerIfDisplayed();
             pageElement.CartIcon().Click();
             pageElement.GoToCheckOut().Click();
 
+
             pageElement.LOGO().Click();
-            pageAssert.AssertGlobal(); //assert
+             pageAssert.AssertGlobal(); //assert*/
 
 
         }
 
 
     }
-
-
-
 
 
 
@@ -382,21 +415,26 @@ namespace MySeleniumProject
             chrome.CleanUp(TestContext);
         }
 
+        [TestInitialize]
+        public void SetUp()
+        {
+
+            chrome.SetUp();
+        }
         [TestMethod, TestCategory("Sökfältet")]
 
         public void SearchFieldAssert()
         {
 
-            chrome.SetUp();
-
+           
             var pageElement = new LandingPage(driver);
-            var pageAssert = new PageAssert(driver);
+           var pageAssert = new PageAssert(driver);
             pageElement.LOGO().Click();
             pageElement.SearchField().Click();         
             pageElement.SearchField().Clear();
             pageElement.SearchField().SendKeys("DOCKSTA");
             pageElement.SearchFieldSumbit().Click();
-           // pageAssert.FindItemBord();//assert                       Assert fungerar inte
+            pageAssert.FindItemBord();//assert                       Assert fungerar inte
 
 
             pageElement.LOGO().Click();
@@ -404,7 +442,7 @@ namespace MySeleniumProject
             pageElement.SearchField().Clear();
             pageElement.SearchField().SendKeys("TOBIAS");
             pageElement.SearchFieldSumbit().Click();
-         //   pageAssert.FindItemStol(); //assert                          Assert fungerar inte
+            pageAssert.FindItemStol(); //assert                          Assert fungerar inte
 
         }
 
@@ -414,8 +452,7 @@ namespace MySeleniumProject
         public void SearchField()
         {
 
-            chrome.SetUp();
-
+           
             var pageElement = new LandingPage(driver);
            
 
@@ -467,7 +504,12 @@ namespace MySeleniumProject
             chrome.CleanUp(TestContext);
         }
 
+        [TestInitialize]
+        public void SetUp()
+        {
 
+            chrome.SetUp();
+        }
 
 
         [TestMethod, TestCategory("Min Profil")]
@@ -475,10 +517,10 @@ namespace MySeleniumProject
         public void Profile()
         {
 
-            chrome.SetUp();
+           
 
             var pageElement = new LandingPage(driver);
-           // var pageAssert = new PageAssert(driver);
+            var pageAssert = new PageAssert(driver);
 
             pageElement.CookieBannerButton().Click();
 
@@ -493,7 +535,7 @@ namespace MySeleniumProject
             pageElement.Password().SendKeys("selenium");
             pageElement.LoginButton().Click();
 
-            //pageAssert.AssertLoginFail(); //assert funkar inte
+            pageAssert.AssertLoginFail(); //assert 
 
             // pageAssert.AssertLoginRightemailWrongpass(); //assert  funkar inte
            // pageAssert.AssertLoginSuccess(); // assert som går inte att tesa just nu har inga konto?
@@ -501,7 +543,7 @@ namespace MySeleniumProject
             pageElement.LostPassword().Click();
             pageElement.CreateFamilyAccount().Click();
 
-            //pageAssert.AssertIkeaFamilyRubrik(); //assert funkar inte
+            pageAssert.AssertIkeaFamilyRubrik(); //assert 
 
 
             pageElement.LOGO().Click();

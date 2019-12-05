@@ -48,8 +48,9 @@ namespace LandindPageClass
 
         public IWebElement LoginAttemptFail() // Texten "Ditt användarnamn eller lösenord är fel" vid fel inlogg.
         {
-            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("# root > div > div.sc-cvbbAY.sc-jhAzac.lovXuZ > div > div.sc-gqjmRU.erpLkq > div.sc-bdVaJa.gfemLW > div > div.alert__container > div > p")));
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector("#root > div > div.sc-cvbbAY.sc-jhAzac.lovXuZ > div > div.sc-gqjmRU.erpLkq > div.sc-bdVaJa.gfemLW > div > div.alert__container > div > p")));
         }
+
 
         public IWebElement LoginBliIkeaFamily() // Texten Ikea Family på Ikea family medlems sidan
         {
@@ -70,13 +71,9 @@ namespace LandindPageClass
         // --------------------BORD--------------------------
         public IWebElement BordSearchDocksta() //Sökandet av Bord  >> Docksta
         {
-            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("#search-results > span:nth-child(3) > div > a > span.product-compact__name")));
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("#content > div > div > div.search-summary > h1")));
         }
-        public IWebElement BordSearchPicture() //Sökandet av stol  >> Färgval
-        {
-            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("#search-results > span:nth-child(3) > div > a > div > div > div > img")));
-        }
-
+      
 
         //|||----------------------Kundvagnssidan-------------------------|||
         public IWebElement KundvagnText() //Texten som visas på Kundvagnssidan där det står "Kundvagn"
@@ -101,7 +98,7 @@ namespace LandindPageClass
 
         public IWebElement InkopTabortList() //Texten "Ta bort" Inne i inköpslistan/inköpslistan/soptunnan
         {
-            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("body > div.ReactModalPortal > div > div > ul > li > div.product__remove-confirmation._Rfx9_._Rfx3_._Rfxb_._Rfxe_._Rfx2_ > div.product__remove-confirmation-yes._Rfxg_ > button > span")));
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector("#one-checkout > div.shoppinglist._Rfx0_._Rfx1_._Rfx2_ > div > div.productlist > div > div > div.product__controls > div > div.product__remove-confirmation-yes._Rfx9_ > button > span")));
         }
 
 
@@ -169,7 +166,7 @@ namespace LandindPageClass
 
         public IWebElement ProductsTextiler() // KOllar text i Produkt/Textiler "Babytextilier"
         {
-            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("body > header > div.header__wrapper > div > nav.header__main-nav > div > ul.main-bygga-menu > li:nth-child(1) > div > div:nth-child(1) > ul > li:nth-child(8) > ul > li:nth-child(9) > a")));
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("body > header > div.header__wrapper > div > nav.header__main-nav > div > ul.main-bygga-menu > li:nth-child(1) > div > div:nth-child(1) > ul > li:nth-child(7) > ul > li:nth-child(9) > a")));
         }
 
         public IWebElement ProductsTextilerKökText() // KOllar text i Produkt/Textiler/Kökstextiler "Matlagningen växlar efter årstiderna......."
@@ -190,9 +187,9 @@ namespace LandindPageClass
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("#content > div.range-catalog-list.js-range-catalog-list > nav > ul > li:nth-child(4) > a > span")));
         }
 
-        public IWebElement ProductsMoblerBordBursText() //Kollar om Texten i Products mobler /bord / "Burs" ..
+        public IWebElement ProductsMoblerBordNordvikenText() //Kollar om Texten i Products mobler /bord / "Nordviken" ..
         {
-            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("#content > div.range-main-container > div.js-catalog-product-list-container > div > div > div:nth-child(2) > div:nth-child(1) > div.range-product-list > div > div:nth-child(2) > div > div > a:nth-child(1) > span.product-compact__name")));
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("#content > div.range-main-container > div.js-catalog-product-list-container > div > div > div:nth-child(2) > div:nth-child(1) > div.range-product-list > div > div:nth-child(3) > div > div > a > span.product-compact__name")));
         }
 
 
@@ -246,7 +243,7 @@ namespace LandindPageClass
 
         public void AssertProductMoblerBord() // vid tryck Produkter/mobler/bord kommer "Bestå" och val av "matbord"
         {
-            Assert.AreEqual("INGATORP / INGATORP", ProductsMoblerBordBursText().Text);
+            Assert.AreEqual("NORDVIKEN", ProductsMoblerBordNordvikenText().Text);
             Assert.AreEqual("Matbord", ProductsMoblerBordText().Text);
         }
 
@@ -285,10 +282,13 @@ namespace LandindPageClass
 
         //|||***************************************************ASSERTS LOGINSIDA********************************************************|||
 
-
-        public void AssertLoginFail() //Asserts som är för Felaktig-login
+       
+        public void AssertLoginFail() //Asserts som visas fel meddelande
         {
-            Assert.AreEqual("Ditt användarnamn eller lösenord är felaktigt.", LoginAttemptFail().Text);
+          
+                Assert.IsTrue(LoginAttemptFail().Displayed);
+
+                                       
         }
 
         public void AssertLoginRightemailWrongpass() //assert för rätt email fel lösen
@@ -311,13 +311,13 @@ namespace LandindPageClass
         public void FindItemStol() //Asserts för sökning av stol
         {
             Assert.AreEqual("TOBIAS", StolSearchTobias().Text);
-            Assert.AreEqual("Färg", StolSearchColor().Text);
+         
         }
 
         public void FindItemBord() //Asserts för sökning av Bord
         {
-            Assert.AreEqual("DOCKSTA", BordSearchDocksta().Text);
-            Assert.IsNotNull(BordSearchPicture());
+            Assert.AreEqual("\"DOCKSTA\"", BordSearchDocksta().Text.Trim());
+           
         }
 
         public void FindItemLampa() //Asserts för sökning av Lampa
