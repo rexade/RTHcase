@@ -10,8 +10,6 @@ namespace LandindPageClass {
 
         private IWebDriver driver;
         private WebDriverWait wait;
- 
-
 
         public LandingPage(IWebDriver driver)
         {
@@ -31,7 +29,7 @@ namespace LandindPageClass {
         */
         public IWebElement CookieBannerButton() //Cookie accept button
         {
-            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Id("onetrust-accept-btn-handler")));
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("onetrust-accept-btn-handler")));
         }
 
         public IWebElement ShoppingBag() //Klicka på kundvagn från startsidan
@@ -77,11 +75,8 @@ namespace LandindPageClass {
 
         public IWebElement CloseBannerCustomer() //Klicka på "Stäng banner via "kundvagn" "
         {
-            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id=\"content\"]/div[3]/div[1]/div[2]/div[2]/a")));
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.XPath("//*[@id=\"content\"]/div[3]/div[1]/div[2]/div[2]/a")));
         }
-
-
-
 
         public IWebElement ProductsFurnitureTv() //Klicka på "tv och mediamöbler"
         {
@@ -118,11 +113,6 @@ namespace LandindPageClass {
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("body > div:nth-child(4) > form > div > span > button.search-box__button.search-box__button--search")));
         }
 
-
-
-
-
-
         /*INKÖPSLISTAN
          
         */
@@ -131,11 +121,6 @@ namespace LandindPageClass {
         {
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("#root > div > div.sc-cvbbAY.sc-jhAzac.lovXuZ > div > div.sc-gqjmRU.erpLkq > div:nth-child(7) > a:nth-child(6)")));
         }
-
-
-
-
-
 
         public IWebElement MyBuyList() //Klicka på "inköpslista"
         {
@@ -192,13 +177,10 @@ namespace LandindPageClass {
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("#one-checkout > div.shoppinglist._Rfx0_._Rfx1_._Rfx2_ > div > div.tabs > div > div:nth-child(1) > button > span")));
         }
 
-
-
         public IWebElement CloseBannerKundVagn() //Klicka på x på visa kundvagnbanner efter att man har lagt till vara i kundvagnen i in köpsöistan"
         {
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/main/div[1]/div/div/button/span/img")));
         }
-
 
         /*KUNDVAGN
          
@@ -228,12 +210,10 @@ namespace LandindPageClass {
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("productQuantity")));
         }
 
-
         public IWebElement ProductAddToCartButton() //Klicka på lägg till kundvagn i produkt
         {
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("#content > div.product-pip.js-product-pip > div.product-pip__top-container.flex.center-horizontal > div.product-pip__right-container > div.product-pip__purchase > form > button.range-btn.range-btn--transactional.range-leading-icon.fill.js-purchase-add-to-cart")));
         }
-
 
         public IWebElement DeleteProductFromBuyList() //Klicka på "soptunnan" från kundvagn
         {
@@ -254,8 +234,6 @@ namespace LandindPageClass {
         {
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("#one-checkout > div.shoppingbag._Rfx0_._Rfx1_._Rfx2_ > div > div.shoppingbag__headline > div > button > span")));
         }
-
-
 
         /*MIN PROFIL
          
@@ -296,12 +274,7 @@ namespace LandindPageClass {
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.PartialLinkText("Skapa ett konto")));
         }
 
-
-
-
         //Buy item random
-
-
 
         public IWebElement BuyItem() //klcika köp item
         {
@@ -313,14 +286,10 @@ namespace LandindPageClass {
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("#content > div.product-pip.js-product-pip > div.product-pip__top-container.flex.center-horizontal > div.product-pip__right-container > div.product-pip__purchase > form > button.range-btn.range-btn--text.range-leading-icon.fill.js-purchase-add-to-list > span > span")));
         }
 
-
-
         public IWebElement ItemAddCheckBannerBuyList() //visa inköpslistan efter att man lagt till produkt banner
         {
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("#content > div.product-pip.js-product-pip > div.product-pip__top-container.flex.center-horizontal > div.product-pip__right-container > div.product-pip__purchase > form > div:nth-child(7) > div.range-popup-frame > div > div > a")));
         }
-
-
     }
 
 
