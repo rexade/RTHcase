@@ -40,3 +40,6 @@ C:\Users\robin\Documents\GitHub\RTHcase\IKEA\MySeleniumProject\obj\Debug\IKEACAS
 C:\Users\robin\Documents\GitHub\RTHcase\IKEA\MySeleniumProject\obj\Debug\IKEACASE.csproj.CopyComplete
 C:\Users\robin\Documents\GitHub\RTHcase\IKEA\MySeleniumProject\obj\Debug\IKEACASE.dll
 C:\Users\robin\Documents\GitHub\RTHcase\IKEA\MySeleniumProject\obj\Debug\IKEACASE.pdb
+C:\Users\henri\Documents\GitHub\RTHcase\IKEA\MySeleniumProject\obj\Debug\IKEACASE.csprojAssemblyReference.cache
+C:\Users\henri\Documents\GitHub\RTHcase\IKEA\MySeleniumProject\obj\Debug\IKEACASE.dll
+C:\Users\henri\Documents\GitHub\RTHcase\IKEA\MySeleniumProject\obj\Debug\IKEACASE.pdb
