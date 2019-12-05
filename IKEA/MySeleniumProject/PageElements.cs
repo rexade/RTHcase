@@ -92,7 +92,7 @@ namespace LandindPageClass
         */
         public IWebElement SearchField() //Klicka på sökrutan 
         {
-            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("body > div:nth-child(4) > form > div.search-field > input")));
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("body > div:nth-child(4) > form > div > input")));
         }
 
 
