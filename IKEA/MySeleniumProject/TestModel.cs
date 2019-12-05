@@ -11,8 +11,8 @@ namespace MySeleniumProject
     {
         public string TestName { get; set; }
         public DateTime TestTime { get; set; }
-        public Object TestStatus { get; set; }
-        public string TestCategory { get; set; }
-        public DateTime TestText { get; set; }
+        public string TestStatus { get; set; }
+        public string[] TestCategory { get; set; }
+        public double DurationTime { get; set; }
     }
 }
