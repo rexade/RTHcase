@@ -15,100 +15,214 @@ namespace MySeleniumProject
     {
         LandingPage landingPage = new LandingPage(driver);
         PageAssert pageAssert = new PageAssert(driver);
-
+        DateTime Timer;
         TestInitializeClass chrome = new TestInitializeClass();
         public TestContext TestContext { get; set; }
 
+        [TestInitialize]
+        public void SetUp()  //Gå till URL
+        {
+            chrome.SetUp();
+            Timer = DateTime.Now;
+        }
 
         [TestCleanup]
         public void Clean() //Rensa cookies
         {
             TestModel model = new TestModel();
-            model.TestName = TestContext.TestName;
-            model.TestCategory = TestContext.FullyQualifiedTestClassName;
             model.TestTime = DateTime.Now;
-            model.TestStatus = TestContext.CurrentTestOutcome;
-            model.TestText = DateTime.UtcNow; 
+            TimeSpan diff = (model.TestTime - Timer);
+            model.DurationTime = diff.TotalSeconds;
+            model.TestName = TestContext.TestName;
+            model.TestCategory = GetTestCategories(TestContext);
+
+            if (TestContext.CurrentTestOutcome == UnitTestOutcome.Passed)
+            {
+                model.TestStatus = "Passed";
+            }
+            else if (TestContext.CurrentTestOutcome == UnitTestOutcome.Failed)
+            {
+                model.TestStatus = "Failed";
+            }
+            else
+            {
+                model.TestStatus = "N/A";
+            }
+            
 
             MongoCRUD db = new MongoCRUD("IKEA");
             db.InsertRecord("Test", model);
             chrome.CleanUp(TestContext);
         }
 
-        [TestMethod, TestCategory("Cookiebanner")]
+        private string[] GetTestCategories(TestContext context)
+        {
+            var attributes = Type.GetType(context.FullyQualifiedTestClassName).GetMethod(context.TestName)
+                .GetCustomAttributes(typeof(TestCategoryAttribute), true);
+
+            string[] categories = new string[attributes.Length];
+
+            for (int i = 0; i < attributes.Length; i++)
+            {
+                categories[i] = (((TestCategoryAttribute)attributes[i]).TestCategories[0]);
+            }
+            Array.Sort(categories, StringComparer.InvariantCulture);
+            return categories;
+        }
+
+        [TestMethod] 
+        [TestCategory("Startsida")] 
+        [TestCategory("Cookiebanner")]
         public void CookieBanner()
         {
-            chrome.SetUp();
+
             landingPage.CookieBannerButton().Click();
-            chrome.CleanUp(TestContext);
+
         }
 
         [TestMethod, TestCategory("Startsidan")]
 
         public void MainPageCheck()
         {
-
-            chrome.SetUp();
-
-            //string fp = Directory.GetParent(System.Reflection.Assembly.GetExecutingAssembly().Location).FullName;
-
-
             landingPage.CookieBannerButton().Click();
             pageAssert.AssertMainpage();        //finns assert som ska fixas!!
-            chrome.CleanUp(TestContext);
 
         }
 
         [TestMethod, TestCategory("Startsidan")]
         public void MainPageCheckLogo()
         {
-            chrome.SetUp();
-
             landingPage.CookieBannerButton().Click();
             landingPage.LOGO().Click();
             pageAssert.AssertMainpage();
-            chrome.CleanUp(TestContext);
-
         }
 
         [TestMethod, TestCategory("Startsidan")]
         public void MainPageGoToShopList()
         {
-            chrome.SetUp();
-
             landingPage.CookieBannerButton().Click();
             landingPage.LOGO().Click();
             pageAssert.AssertMainpage();
             landingPage.BuyList().Click();
             pageAssert.AssertInkop(); //Text "Inte redo att köpa riktigt än?"
-            chrome.CleanUp(TestContext);
+
         }
 
         [TestMethod, TestCategory("Startsidan")]
         public void MainPageGoToShopBag()
         {
-            chrome.SetUp();
-
             landingPage.CookieBannerButton().Click();
             landingPage.LOGO().Click();
             pageAssert.AssertMainpage();
             landingPage.ShoppingBag().Click();
             pageAssert.AssertKundvagn();
-            chrome.CleanUp(TestContext);
         }
 
-        [TestMethod, TestCategory("Startsidan till Produkter")]
+        [TestMethod] 
+        [TestCategory("Startsidan")] 
+        [TestCategory("Produkter")]
         public void MainPageToProducts()
         {
-            chrome.SetUp();
-
             landingPage.CookieBannerButton().Click();
             pageAssert.AssertMainpage();
             landingPage.Products().Click();
             pageAssert.AssertProductpage();
-            chrome.CleanUp(TestContext);
         }
 
+        [TestMethod] 
+        [TestCategory("Startsidan")] 
+        [TestCategory("Produkter")] 
+        [TestCategory("Möbler")]
+        public void ProductsToFurnitureDesk()
+        {
+            landingPage.CookieBannerButton().Click();
+            pageAssert.AssertMainpage();
+            landingPage.Products().Click();
+            pageAssert.AssertProductpage();
+            landingPage.ProductsFurniture().Click();
+            pageAssert.AssertProductMobler();
+            landingPage.ProductsFurnitureTableAndDesks().Click();
+            pageAssert.AssertProductMoblerBord();
+        }
+
+        [TestMethod] 
+        [TestCategory("Startsidan")] 
+        [TestCategory("Produkter")]
+        [TestCategory("Möbler")]
+        [TestCategory("Kundvagn")]
+        public void ProductsToFurnitureDeskAddToCart()
+        {
+            landingPage.CookieBannerButton().Click();
+            pageAssert.AssertMainpage();
+            landingPage.Products().Click();
+            pageAssert.AssertProductpage();
+            landingPage.ProductsFurniture().Click();
+            pageAssert.AssertProductMobler();
+            landingPage.ProductsFurnitureTableAndDesks().Click();
+            pageAssert.AssertProductMoblerBord();
+            landingPage.AddFurnitureTableAndDesks().Click();
+            landingPage.AddFurnitureTableAndDesksToCart().Click();
+            if (landingPage.CloseBannerCustomer().Displayed)
+            {
+                landingPage.CloseBannerCustomer().Click();
+            }
+        }
+        [TestMethod] 
+        [TestCategory("Startsidan")]
+        [TestCategory("Produkter")]
+        [TestCategory("Möbler")]
+        [TestCategory("Kundvagn")] 
+        [TestCategory("CheckOut")]
+        public void GoToCheckOut()
+        {
+            landingPage.CookieBannerButton().Click();
+            pageAssert.AssertMainpage();
+            landingPage.Products().Click();
+            pageAssert.AssertProductpage();
+            landingPage.ProductsFurniture().Click();
+            pageAssert.AssertProductMobler();
+            landingPage.ProductsFurnitureTableAndDesks().Click();
+            pageAssert.AssertProductMoblerBord();
+            landingPage.AddFurnitureTableAndDesks().Click();
+            landingPage.AddFurnitureTableAndDesksToCart().Click();
+            if (landingPage.CloseBannerCustomer().Displayed)
+            {
+                landingPage.CloseBannerCustomer().Click();
+            }
+            else
+            {
+                landingPage.CartIcon().Click();
+            }
+        }
+
+        [TestMethod]
+        [TestCategory("Startsidan")]
+        [TestCategory("Produkter")]
+        [TestCategory("Möbler")]
+        [TestCategory("Kundvagn")]
+        [TestCategory("CheckOut")]
+        public void GoToFinalCheckOut()
+        {
+            landingPage.CookieBannerButton().Click();
+            pageAssert.AssertMainpage();
+            landingPage.Products().Click();
+            pageAssert.AssertProductpage();
+            landingPage.ProductsFurniture().Click();
+            pageAssert.AssertProductMobler();
+            landingPage.ProductsFurnitureTableAndDesks().Click();
+            pageAssert.AssertProductMoblerBord();
+            landingPage.AddFurnitureTableAndDesks().Click();
+            landingPage.AddFurnitureTableAndDesksToCart().Click();
+            if (landingPage.CloseBannerCustomer().Displayed)
+            {
+                landingPage.CloseBannerCustomer().Click();
+            }
+            else
+            {
+                landingPage.CartIcon().Click();
+            }
+            landingPage.GoToCheckOut().Click();
+        }
 
         /*landingPage.ShoppingBag().Click();
         landingPage.BuyList().Click();          

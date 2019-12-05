@@ -31,7 +31,7 @@ namespace LandindPageClass {
         */
         public IWebElement CookieBannerButton() //Cookie accept button
         {
-            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("onetrust-accept-btn-handler")));
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Id("onetrust-accept-btn-handler")));
         }
 
         public IWebElement ShoppingBag() //Klicka på kundvagn från startsidan
@@ -64,6 +64,24 @@ namespace LandindPageClass {
         {
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/header/div[2]/div/nav[1]/div/ul[1]/li[1]/div/div[1]/ul/li[1]/ul/li[4]")));
         }
+
+        public IWebElement AddFurnitureTableAndDesks() //Klicka på "INGATORP / INGOLF"
+        {
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id=\"content\"]/div[4]/div[2]/div/div/div[2]/div[1]/div[1]/div/div[1]/div/div/a/span[1]")));
+        }
+
+        public IWebElement AddFurnitureTableAndDesksToCart() //Klicka på "Lägg till i kundvagn"
+        {
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id=\"content\"]/div[2]/div[2]/div[2]/div[2]/form/button[1]")));
+        }
+
+        public IWebElement CloseBannerCustomer() //Klicka på "Stäng banner via "kundvagn" "
+        {
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id=\"content\"]/div[3]/div[1]/div[2]/div[2]/a")));
+        }
+
+
+
 
         public IWebElement ProductsFurnitureTv() //Klicka på "tv och mediamöbler"
         {
