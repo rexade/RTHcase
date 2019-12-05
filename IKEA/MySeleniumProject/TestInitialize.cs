@@ -17,19 +17,13 @@ namespace MySeleniumProject
 
         public bool IsInitialized;
         public TestInitializeClass()
-        {
-            this.SetUp();
-           
+        {           
             IsInitialized = true;
-
         }
-
-
 
         [AssemblyInitialize]
         public static void Initialize(TestContext context)  //Startar chrome driver
         {
-
             switch (TestConfig.BrowserForTesting)
             {
                 case TestConfig.BrowserType.Chrome:
@@ -41,9 +35,7 @@ namespace MySeleniumProject
                 default:
                     Assert.Fail("Invalid test configuration: No browser type set.");
                     break;
-
             }
-
             //driver = new ChromeDriver();
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
@@ -51,38 +43,26 @@ namespace MySeleniumProject
         [TestInitialize]
         public void SetUp()  //Gå till URL
         {
-           
-
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl("https://www.ikea.com/se/sv");
-
         }
 
 
         public void CleanUp(TestContext Context) //Rensa cookies
         {
-
-
-            if (Context.CurrentTestOutcome != UnitTestOutcome.Passed)
+            /*if (Context.CurrentTestOutcome != UnitTestOutcome.Passed)
             {
                 var fileName = Context.TestName + "-" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".png";
                 ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(fileName);
                
-            }
-
+            }*/
             driver.Manage().Cookies.DeleteAllCookies();
-            //Assert.AreEqual(0, driver.Manage().Cookies.AllCookies.Count);
-          
-
-
-
         }
 
         [AssemblyCleanup]
         public static void TearDown()// Stänga ner alla drivers
         {
             driver.Dispose();
-
         }
     
     }

@@ -13,7 +13,6 @@ namespace LandindPageClass
         private IWebDriver driver;
         private WebDriverWait wait;
 
-
         public PageAssert(IWebDriver driver)
         {
             this.driver = driver;
@@ -30,7 +29,6 @@ namespace LandindPageClass
         }
 
         //|||-------------------Loginpage----------------------------------|||
-
 
         public IWebElement RemailWpass() //Texten som kommer upp om man skriver rätt email men fel lösen.-
         {
@@ -57,7 +55,6 @@ namespace LandindPageClass
         }
 
         //|||-------------------Produkthantering----------------------------------|||
-
             // ---------------------STOL-----------------------
         public IWebElement StolSearchTobias() //Sökandet av stol  >> Tobias
         {
@@ -76,7 +73,6 @@ namespace LandindPageClass
         {
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("#search-results > span:nth-child(3) > div > a > div > div > div > img")));
         }
-
 
         //|||----------------------Kundvagnssidan-------------------------|||
         public IWebElement KundvagnText() //Texten som visas på Kundvagnssidan där det står "Kundvagn"
@@ -104,12 +100,10 @@ namespace LandindPageClass
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("body > div.ReactModalPortal > div > div > ul > li > div.product__remove-confirmation._Rfx9_._Rfx3_._Rfxb_._Rfxe_._Rfx2_ > div.product__remove-confirmation-yes._Rfxg_ > button > span")));
         }
 
-
         public IWebElement InkopTillganligList() //Texten "Välj ett Ikea varuhus" Inne i inköpslistan/inköpslistan När man valt en lista med något i listan. finns det "Tillängligt varuhus?"
         {
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("#storeselector")));
         }
-
 
         //|||----------------------Startstidan-------------------------|||
         public IWebElement StartPageLogo()//Kollar om Headern finns(IKEA LOGO).
@@ -149,7 +143,6 @@ namespace LandindPageClass
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector("#populära_sökningar")));
         }
 
-
         //||||----------------------------------------------Produkter-flik--------------------------------------------------|||
         public IWebElement ProductsBedText() //Kollar om Texten Sängar och madrasser i produkter..
         {
@@ -166,7 +159,6 @@ namespace LandindPageClass
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector("#content > div.range-main-container > div.js-catalog-product-list-container > div > div > div:nth-child(2) > div:nth-child(1) > div.range-product-list > div > div.range-product-list-introduction > div > div > div > p")));
         }
 
-
         public IWebElement ProductsTextiler() // KOllar text i Produkt/Textiler "Babytextilier"
         {
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("body > header > div.header__wrapper > div > nav.header__main-nav > div > ul.main-bygga-menu > li:nth-child(1) > div > div:nth-child(1) > ul > li:nth-child(8) > ul > li:nth-child(9) > a")));
@@ -182,8 +174,6 @@ namespace LandindPageClass
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("#gardiner_\\&_rullgardiner")));
         }
 
-
-
         //||||----------------------------------------Produkter/Mobler/bord---------------------------------------------|||
         public IWebElement ProductsMoblerBordText() //Kollar om Texten i Products mobler /bord / "Matbord" ..
         {
@@ -195,16 +185,11 @@ namespace LandindPageClass
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector("#content > div.range-main-container > div.js-catalog-product-list-container > div > div > div:nth-child(2) > div:nth-child(1) > div.range-product-list > div > div:nth-child(2) > div > div > a:nth-child(1) > span.product-compact__name")));
         }
 
-
-
         //|||***************************************************ASSERTS********************************************************|||
-
-
         //|||***************************************************ASSERTS- KUNDVAGN********************************************************|||
 
         public void AssertKundvagn() //Kundvagnssidan
         {
-
             Assert.AreEqual("Kundvagn0", KundvagnText().Text); //Jämför texten Kundvagn med texten som finns på kundvagnsidan
            // Assert.AreEqual("Säker shopping med SSL datakryptering", SecureshopText().Text);                                        Går inte genom
         }
@@ -213,7 +198,7 @@ namespace LandindPageClass
 
         public void AssertMainpage() //Asserts som är på Startsidan
         {
-            //Assert.AreEqual("Kundvagn", KundvagnText().Text); //Jämför texten Kundvagn med texten som finns på kundvagnsidan
+         //Assert.AreEqual("Kundvagn", KundvagnText().Text); //Jämför texten Kundvagn med texten som finns på kundvagnsidan
             Assert.IsNotNull(StartPageLogo().Displayed); //Jämför om logon "IKEA i vänstra hörnet" finns.
 
          //Jämför menyflikarnas text.
@@ -224,6 +209,7 @@ namespace LandindPageClass
             Assert.AreEqual("Kundservice", StartPageKundserviceText().Text);
         }
         //|||***************************************************ASSERTS PRODUKTER********************************************************|||
+        
         public void AssertProductpage() // Vid tryck på Produkter 
         {
             Assert.AreEqual("Sängar & madrasser", ProductsBedText().Text);
@@ -269,8 +255,7 @@ namespace LandindPageClass
 
         public void AssertInkop() //Asserts på Inköpslistan
         {
-            Assert.AreEqual("Inte redo att köpa riktigt än?", NotReadyBuyYet().Text);
-          
+            Assert.AreEqual("Inte redo att köpa riktigt än?", NotReadyBuyYet().Text);  
         }
 
         public void AssertTabortInkop() // ta bort inköpslistan
@@ -284,7 +269,6 @@ namespace LandindPageClass
         }
 
         //|||***************************************************ASSERTS LOGINSIDA********************************************************|||
-
 
         public void AssertLoginFail() //Asserts som är för Felaktig-login
         {
@@ -325,16 +309,12 @@ namespace LandindPageClass
 
         }
 
-
         //|||----------------------GLOBAL ASSERTS-------------------------|||
 
         public void AssertGlobal() // Asserts som är Globala.
         {
             Assert.AreEqual("Handla på IKEA.se", ShopAtIkea_Text().Text);
         }
-
-
-
     }
 
 
