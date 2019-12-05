@@ -11,13 +11,7 @@ namespace MySeleniumProject
     [TestClass]
     public  class TestInitializeClass
     {
-
-
-        // var chromeOptions = new ChromeOptions();
-        //  chromeOptions.AddArguments("headless");
-
-       
-
+   
         public static IWebDriver driver; //Här deklarera jag chrome driver globalt för att använda i alla funktioner
         public static WebDriverWait wait;
 
@@ -55,7 +49,7 @@ namespace MySeleniumProject
         }
 
         [TestInitialize]
-        public void SetUp()  //Gå till uRL
+        public void SetUp()  //Gå till URL
         {
            
 
@@ -68,16 +62,16 @@ namespace MySeleniumProject
         public void CleanUp(TestContext Context) //Rensa cookies
         {
 
+
             if (Context.CurrentTestOutcome != UnitTestOutcome.Passed)
             {
                 var fileName = Context.TestName + "-" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".png";
                 ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(fileName);
-                // string fp = Directory.GetParent(System.Reflection.Assembly.GetExecutingAssembly().Location).FullName;
-                // string path = System.IO.Path.Combine(fp,fileName);
+               
             }
 
             driver.Manage().Cookies.DeleteAllCookies();
-            Assert.AreEqual(0, driver.Manage().Cookies.AllCookies.Count);
+            //Assert.AreEqual(0, driver.Manage().Cookies.AllCookies.Count);
           
 
 
@@ -85,7 +79,7 @@ namespace MySeleniumProject
         }
 
         [AssemblyCleanup]
-        public static void TearDown()// Stänga near all drivers
+        public static void TearDown()// Stänga ner alla drivers
         {
             driver.Dispose();
 
