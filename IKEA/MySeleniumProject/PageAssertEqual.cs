@@ -35,6 +35,11 @@ namespace LandindPageClass
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("#root > div > div.sc-cvbbAY.sc-jhAzac.lovXuZ > div > div.sc-gqjmRU.erpLkq > div.sc-bdVaJa.gfemLW > div > div.alert__container > div > p"))); 
         }
 
+        public IWebElement CreateAccountPage() //Texten som kommer upp om man skriver rätt email men fel lösen.-
+        {
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//h1[text() = 'Skapa en IKEA profil']")));
+        }
+
         public IWebElement LoginAttemptSuccess() //TExten "Min profil" vid lyckad login
         {
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("#mss-member > div:nth-child(1) > div.WelcomeBoxBlock_1MzF- > div > div > div > div.Container_1XzMO.Left_2GheH > div:nth-child(1)")));
@@ -46,8 +51,20 @@ namespace LandindPageClass
 
         public IWebElement LoginAttemptFail() // Texten "Ditt användarnamn eller lösenord är fel" vid fel inlogg.
         {
-            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("# root > div > div.sc-cvbbAY.sc-jhAzac.lovXuZ > div > div.sc-gqjmRU.erpLkq > div.sc-bdVaJa.gfemLW > div > div.alert__container > div > p")));
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath("//*[@id=\"root\"]/div/div[2]/div/div[2]/div[1]/div/div[2]")));
         }
+
+        public IWebElement LoginAttemptFailLostPasswordButton() // Texten "Ditt användarnamn eller lösenord är fel" vid fel inlogg.
+        {
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath("//*[@id=\"root\"]/div/div[2]/div/div[2]/div[1]/div/div[2]")));
+        }
+
+        public IWebElement LoginPageWelcome() // Texten "Ditt användarnamn eller lösenord är fel" vid fel inlogg.
+        {
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath("//*[@id=\"root\"]/div/div[2]/div/div[2]/h3")));
+        }
+
+        
 
         public IWebElement LoginBliIkeaFamily() // Texten Ikea Family på Ikea family medlems sidan
         {
@@ -58,7 +75,7 @@ namespace LandindPageClass
             // ---------------------STOL-----------------------
         public IWebElement StolSearchTobias() //Sökandet av stol  >> Tobias
         {
-            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("#search-results > span:nth-child(2) > div > a > span.product-compact__name")));
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/div[2]/form/div[2]/div/ol[3]/li[1]/a/div/p[1]")));
         }
         public IWebElement StolSearchColor() //Sökandet av stol  >> Färgval
         {
@@ -67,7 +84,7 @@ namespace LandindPageClass
         // --------------------BORD--------------------------
         public IWebElement BordSearchDocksta() //Sökandet av Bord  >> Docksta
         {
-            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("#search-results > span:nth-child(3) > div > a > span.product-compact__name")));
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath("/html/body/div[2]/form/div[2]/div/ol[2]/li/a/div/p[1]")));
         }
         public IWebElement BordSearchPicture() //Sökandet av stol  >> Färgval
         {
@@ -97,12 +114,12 @@ namespace LandindPageClass
 
         public IWebElement InkopTabortList() //Texten "Ta bort" Inne i inköpslistan/inköpslistan/soptunnan
         {
-            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("body > div.ReactModalPortal > div > div > ul > li > div.product__remove-confirmation._Rfx9_._Rfx3_._Rfxb_._Rfxe_._Rfx2_ > div.product__remove-confirmation-yes._Rfxg_ > button > span")));
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath("//span[text() = 'Ta bort']")));
         }
 
         public IWebElement InkopTillganligList() //Texten "Välj ett Ikea varuhus" Inne i inköpslistan/inköpslistan När man valt en lista med något i listan. finns det "Tillängligt varuhus?"
         {
-            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("#storeselector")));
+            return (new SelectElement( wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("storeselector"))))).SelectedOption;
         }
 
         //|||----------------------Startstidan-------------------------|||
@@ -161,7 +178,7 @@ namespace LandindPageClass
 
         public IWebElement ProductsTextiler() // KOllar text i Produkt/Textiler "Babytextilier"
         {
-            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("body > header > div.header__wrapper > div > nav.header__main-nav > div > ul.main-bygga-menu > li:nth-child(1) > div > div:nth-child(1) > ul > li:nth-child(8) > ul > li:nth-child(9) > a")));
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath("//a[text() = 'Babytextilier']")));
         }
 
         public IWebElement ProductsTextilerKökText() // KOllar text i Produkt/Textiler/Kökstextiler "Matlagningen växlar efter årstiderna......."
@@ -232,7 +249,7 @@ namespace LandindPageClass
 
         public void AssertProductMoblerBord() // vid tryck Produkter/mobler/bord kommer "Bestå" och val av "matbord"
         {
-            Assert.AreEqual("INGATORP / INGATORP", ProductsMoblerBordBursText().Text);
+            Assert.AreEqual("NORDVIKEN", ProductsMoblerBordBursText().Text);
             Assert.AreEqual("Matbord", ProductsMoblerBordText().Text);
         }
 
@@ -258,7 +275,7 @@ namespace LandindPageClass
             Assert.AreEqual("Inte redo att köpa riktigt än?", NotReadyBuyYet().Text);  
         }
 
-        public void AssertTabortInkop() // ta bort inköpslistan
+        public void AssertTabortInkop() // ta bort från inköpslistan
         {
             Assert.AreEqual("Ta bort", InkopTabortList().Text);
         }
@@ -270,9 +287,24 @@ namespace LandindPageClass
 
         //|||***************************************************ASSERTS LOGINSIDA********************************************************|||
 
+        public void AssertWelcome() //Asserts som är för Felaktig-login
+        {
+            Assert.AreEqual("Hej! Logga in på ditt IKEA-konto med din e-postadress.", LoginPageWelcome().Text);
+        }
+
+        public void AssertCreateNewAccount() //Asserts som är för Felaktig-login
+        {
+            Assert.AreEqual("Skapa en IKEA profil", CreateAccountPage().Text);
+        }
+
         public void AssertLoginFail() //Asserts som är för Felaktig-login
         {
             Assert.AreEqual("Ditt användarnamn eller lösenord är felaktigt.", LoginAttemptFail().Text);
+        }
+
+        public void AssertLoginFailUseLostPassword() //Asserts som är för Felaktig-login
+        {
+            Assert.AreEqual("Om du inte kommer ihåg ditt lösenord så använd länken \"Glömt ditt lösenord\".", LoginAttemptFailLostPasswordButton().Text);
         }
 
         public void AssertLoginRightemailWrongpass() //assert för rätt email fel lösen
@@ -295,13 +327,13 @@ namespace LandindPageClass
         public void FindItemStol() //Asserts för sökning av stol
         {
             Assert.AreEqual("TOBIAS", StolSearchTobias().Text);
-            Assert.AreEqual("Färg", StolSearchColor().Text);
+            //Assert.AreEqual("Färg", StolSearchColor().Text);
         }
 
         public void FindItemBord() //Asserts för sökning av Bord
         {
             Assert.AreEqual("DOCKSTA", BordSearchDocksta().Text);
-            Assert.IsNotNull(BordSearchPicture());
+            //Assert.IsNotNull(BordSearchPicture());
         }
 
         public void FindItemLampa() //Asserts för sökning av Lampa

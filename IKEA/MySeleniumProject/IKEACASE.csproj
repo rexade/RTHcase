@@ -96,9 +96,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheckOut.cs" />
+    <Compile Include="Inkopslista.cs" />
+    <Compile Include="Kundvagn.cs" />
     <Compile Include="MongoDb.cs" />
     <Compile Include="PageAssertEqual.cs" />
     <Compile Include="PageElements.cs" />
+    <Compile Include="Produkter.cs" />
+    <Compile Include="Profile.cs" />
+    <Compile Include="Sokfalt.cs" />
+    <Compile Include="Startsida.cs" />
     <Compile Include="TestConfig.cs" />
     <Compile Include="TestInitialize.cs" />
     <Compile Include="TestModel.cs" />
