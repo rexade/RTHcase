@@ -9,6 +9,7 @@ namespace MySeleniumProject
 
     class TestModel
     {
+        public string TestClass { get; set; }
         public string TestName { get; set; }
         public DateTime TestTime { get; set; }
         public string TestStatus { get; set; }

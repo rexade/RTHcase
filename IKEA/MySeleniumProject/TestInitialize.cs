@@ -48,7 +48,7 @@ namespace MySeleniumProject
         }
 
 
-        public void CleanUp(TestContext Context) //Rensa cookies
+        public void CleanUp(TestContext Context, DateTime Timer) //Rensa cookies
         {
             /*if (Context.CurrentTestOutcome != UnitTestOutcome.Passed)
             {
@@ -56,7 +56,32 @@ namespace MySeleniumProject
                 ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(fileName);
                
             }*/
+            TestModel model = new TestModel();
+            model.TestTime = DateTime.Now;
+            TimeSpan diff = (model.TestTime - Timer);
+            model.DurationTime = diff.TotalSeconds;
+            model.TestClass = Context.FullyQualifiedTestClassName.Replace("MySeleniumProject.", "");
+            model.TestName = Context.TestName;
+            model.TestCategory = GetTestCategories(Context);
+
+            if (Context.CurrentTestOutcome == UnitTestOutcome.Passed)
+            {
+                model.TestStatus = "Passed";
+            }
+            else if (Context.CurrentTestOutcome == UnitTestOutcome.Failed)
+            {
+                model.TestStatus = "Failed";
+            }
+            else
+            {
+                model.TestStatus = "N/A";
+            }
+
+
+            MongoCRUD db = new MongoCRUD("IKEA");
+            db.InsertRecord("Test", model);
             driver.Manage().Cookies.DeleteAllCookies();
+            //Assert.AreEqual(0, driver.Manage().Cookies.AllCookies.Count);
         }
 
         [AssemblyCleanup]
@@ -64,7 +89,22 @@ namespace MySeleniumProject
         {
             driver.Dispose();
         }
-    
+
+        private string[] GetTestCategories(TestContext context)
+        {
+            var attributes = Type.GetType(context.FullyQualifiedTestClassName).GetMethod(context.TestName)
+                .GetCustomAttributes(typeof(TestCategoryAttribute), true);
+
+            string[] categories = new string[attributes.Length];
+
+            for (int i = 0; i < attributes.Length; i++)
+            {
+                categories[i] = (((TestCategoryAttribute)attributes[i]).TestCategories[0]);
+            }
+            Array.Sort(categories, StringComparer.InvariantCulture);
+            return categories;
+        }
+
     }
 
 }

@@ -70,7 +70,7 @@ namespace LandindPageClass {
 
         public IWebElement AddFurnitureTableAndDesksToCart() //Klicka på "Lägg till i kundvagn"
         {
-            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id=\"content\"]/div[2]/div[2]/div[2]/div[2]/form/button[1]")));
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id=\"content\"]/div[2]/div[2]/div[2]/div[3]/form/button[1]")));
         }
 
         public IWebElement CloseBannerCustomer() //Klicka på "Stäng banner via "kundvagn" "
@@ -85,12 +85,12 @@ namespace LandindPageClass {
 
         public IWebElement ProductsTextiles() //Klicka på "Textilier"
         {
-            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/header/div[2]/div/nav[1]/div/ul[1]/li[1]/div/div[1]/ul/li[8]/button")));
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/header/div[2]/div/nav[1]/div/ul[1]/li[1]/div/div[1]/ul/li[7]/button")));
         }
 
         public IWebElement ProductsTextilesKitchen() //Klicka på "kökstextilier"
         {
-            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("/html/body/header/div[2]/div/nav[1]/div/ul[1]/li[1]/div/div[1]/ul/li[8]/ul/li[4]")));
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//Button[text() = 'Textilier']/parent::li//a[text() = 'Kökstextilier']")));
         }
 
         public IWebElement ProductsTextilesCurtains() //Klicka på "gardiner och rullgardiner"
@@ -110,7 +110,7 @@ namespace LandindPageClass {
 
         public IWebElement SearchFieldSumbit() //Klicka på sökrutan 
         {
-            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("body > div:nth-child(4) > form > div > span > button.search-box__button.search-box__button--search")));
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//form[@role = 'search']")));
         }
 
         /*INKÖPSLISTAN
@@ -159,7 +159,7 @@ namespace LandindPageClass {
 
         public IWebElement SelectAmount() //Klicka på "antal" listan
         {
-            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("#js_qty_19280680")));
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("js_qty_10203610")));
         }
 
         public IWebElement AddToShoppingBagFromBuyList() //Klicka på "lägg till i kundvagn"
@@ -235,6 +235,16 @@ namespace LandindPageClass {
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("#one-checkout > div.shoppingbag._Rfx0_._Rfx1_._Rfx2_ > div > div.shoppingbag__headline > div > button > span")));
         }
 
+        public IWebElement ZipCode() //Klicka på "postnummer"
+        {
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("//input [@name = 'zipcode']")));
+        }
+
+        public IWebElement CartCloseBanner() //Klicka på "andra tittade på"
+        {
+            return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("#content > div.js-sticky-bottom-bar > div.rec-popup-wrapper.rec-popup-wrapper--open > div.rec-popup.rec-popup-ikea-col-12.rec-popup-ikea-col-sm-12.rec-popup-ikea-col-md-6.rec-popup-ikea-col-lg-4.rec-popup--open > div.rec-popup-top > div.rec-popup-top-bar > button > svg")));
+        }
+
         /*MIN PROFIL
          
         */
@@ -289,6 +299,14 @@ namespace LandindPageClass {
         public IWebElement ItemAddCheckBannerBuyList() //visa inköpslistan efter att man lagt till produkt banner
         {
             return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("#content > div.product-pip.js-product-pip > div.product-pip__top-container.flex.center-horizontal > div.product-pip__right-container > div.product-pip__purchase > form > div:nth-child(7) > div.range-popup-frame > div > div > a")));
+        }
+
+        public void CloseBannerIfDisplayed()
+        {
+            if (CartCloseBanner().Displayed)
+            {
+                CartCloseBanner().Click();
+            }
         }
     }
 
